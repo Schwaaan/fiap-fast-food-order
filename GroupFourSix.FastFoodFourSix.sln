@@ -19,16 +19,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{1E753D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kubernetes", "kubernetes", "{4E039F95-FADF-4984-B0CD-493A2D6BAE8A}"
 	ProjectSection(SolutionItems) = preProject
-		four-six-api\kubernetes\api-deployment.yaml = four-six-api\kubernetes\api-deployment.yaml
-		four-six-api\kubernetes\api-hpa.yaml = four-six-api\kubernetes\api-hpa.yaml
-		four-six-api\kubernetes\api-service.yaml = four-six-api\kubernetes\api-service.yaml
-		four-six-api\kubernetes\metrics.yaml = four-six-api\kubernetes\metrics.yaml
-		four-six-api\kubernetes\pv-claim.yaml = four-six-api\kubernetes\pv-claim.yaml
-		four-six-api\kubernetes\pv-volume.yaml = four-six-api\kubernetes\pv-volume.yaml
-		four-six-api\kubernetes\redis-deployment.yaml = four-six-api\kubernetes\redis-deployment.yaml
-		four-six-api\kubernetes\redis-service.yaml = four-six-api\kubernetes\redis-service.yaml
-		four-six-api\kubernetes\sqlserver-service.yaml = four-six-api\kubernetes\sqlserver-service.yaml
-		four-six-api\kubernetes\sqlserver-order-deployment.yaml = four-six-api\kubernetes\sqlserver-order-deployment.yaml
+		four-six-api\kubernetes\order-metrics.yaml = four-six-api\kubernetes\order-metrics.yaml
+		four-six-api\kubernetes\order-api-service.yaml = four-six-api\kubernetes\order-api-service.yaml
+		four-six-api\kubernetes\order-api-hpa.yaml = four-six-api\kubernetes\order-api-hpa.yaml
+		four-six-api\kubernetes\order-api-deployment.yaml = four-six-api\kubernetes\order-api-deployment.yaml
+		four-six-api\kubernetes\order-sqlserver-service.yaml = four-six-api\kubernetes\order-sqlserver-service.yaml
+		four-six-api\kubernetes\order-pv-volume.yaml = four-six-api\kubernetes\order-pv-volume.yaml
+		four-six-api\kubernetes\order-sqlserver-deployment.yaml = four-six-api\kubernetes\order-sqlserver-deployment.yaml
+		four-six-api\kubernetes\order-pv-claim.yaml = four-six-api\kubernetes\order-pv-claim.yaml
 		four-six-api\kubernetes\stress.ps1 = four-six-api\kubernetes\stress.ps1
 		four-six-api\kubernetes\_comandos.txt = four-six-api\kubernetes\_comandos.txt
 	EndProjectSection
@@ -37,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSix.UseCases", "four-si
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSix.Controllers", "four-six-api\src\FourSix.Controllers\FourSix.Controllers.csproj", "{E30523BC-7B15-4E7D-BBBA-92B717EC2A45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "four-six-api\tests\UnitTests\UnitTests.csproj", "{3E0CEEA0-B1A2-430F-AECB-A309BA9E8CD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "four-six-api\tests\UnitTests\UnitTests.csproj", "{3E0CEEA0-B1A2-430F-AECB-A309BA9E8CD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

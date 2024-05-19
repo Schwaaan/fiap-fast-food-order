@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: foursix-hpa
+  name: foursix-order-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: foursix-deployment
+    name: foursix-order-deployment
   minReplicas: 2
   maxReplicas: 5
   metrics:

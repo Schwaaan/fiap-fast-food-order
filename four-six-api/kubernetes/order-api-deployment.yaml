@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: foursix-deployment
+  name: foursix-order-deployment
   labels:
-    app: foursix-deployment
+    app: foursix-order-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: foursix-deployment
+      app: foursix-order-deployment
   template:
     metadata:
       labels:
-        app: foursix-deployment
+        app: foursix-order-deployment
     spec:
       containers:
       - name: c-foursix-deployment

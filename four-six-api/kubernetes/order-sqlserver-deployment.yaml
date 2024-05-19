@@ -8,26 +8,26 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mssql
+      app: ordermssql
   template:
     metadata:
       labels:
-        app: mssql
+        app: ordermssql
     spec:
       containers:
-      - name: mssql
+      - name: ordermssql
         image: mcr.microsoft.com/mssql/server:2022-latest
         ports:
-          - containerPort: 1434
+          - containerPort: 1433
         env:
         - name: MSSQL_SA_PASSWORD
           value: 'SenhaDoBanco(123)'
         - name: ACCEPT_EULA
           value: "Y"
         volumeMounts:
-        - name: mssqldb
+        - name: ordermssqldb
           mountPath: /var/opt/mssql/data
       volumes:
-      - name: mssqldb
+      - name: ordermssqldb
         persistentVolumeClaim:
-          claimName: mssql-pvc
+          claimName: mssql-order-pvc
