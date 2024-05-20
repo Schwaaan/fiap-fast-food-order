@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FourSix.Controllers.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240514010920_CreateMicroservice")]
-    partial class CreateMicroservice
+    [Migration("20240520051028_CreateMicroservico")]
+    partial class CreateMicroservico
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,23 @@ namespace FourSix.Controllers.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("FourSix.Domain.Entities.ClienteAggregate.Cliente", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b")
+                        });
+                });
 
             modelBuilder.Entity("FourSix.Domain.Entities.PedidoAggregate.Pedido", b =>
                 {
@@ -48,6 +65,8 @@ namespace FourSix.Controllers.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClienteId");
+
                     b.HasIndex("StatusId");
 
                     b.ToTable("Pedido", (string)null);
@@ -57,7 +76,7 @@ namespace FourSix.Controllers.Migrations
                         {
                             Id = new Guid("78e3b8d0-be9a-4407-9304-c61788797808"),
                             ClienteId = new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"),
-                            DataPedido = new DateTime(2024, 5, 13, 17, 9, 20, 269, DateTimeKind.Local).AddTicks(5522),
+                            DataPedido = new DateTime(2024, 5, 19, 21, 10, 28, 327, DateTimeKind.Local).AddTicks(3872),
                             NumeroPedido = 1,
                             StatusId = (short)1
                         });
@@ -88,7 +107,7 @@ namespace FourSix.Controllers.Migrations
                         {
                             PedidoId = new Guid("78e3b8d0-be9a-4407-9304-c61788797808"),
                             Sequencia = 0,
-                            DataStatus = new DateTime(2024, 5, 13, 17, 9, 20, 269, DateTimeKind.Local).AddTicks(5522),
+                            DataStatus = new DateTime(2024, 5, 19, 21, 10, 28, 327, DateTimeKind.Local).AddTicks(3872),
                             StatusId = (short)1
                         });
                 });
@@ -163,6 +182,11 @@ namespace FourSix.Controllers.Migrations
                         },
                         new
                         {
+                            Id = (short)3,
+                            Descricao = "Pago"
+                        },
+                        new
+                        {
                             Id = (short)4,
                             Descricao = "Em Preparação"
                         },
@@ -180,16 +204,29 @@ namespace FourSix.Controllers.Migrations
                         {
                             Id = (short)7,
                             Descricao = "Cancelado"
+                        },
+                        new
+                        {
+                            Id = (short)8,
+                            Descricao = "Pagamento Recusado"
                         });
                 });
 
             modelBuilder.Entity("FourSix.Domain.Entities.PedidoAggregate.Pedido", b =>
                 {
+                    b.HasOne("FourSix.Domain.Entities.ClienteAggregate.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FourSix.Domain.Entities.PedidoAggregate.StatusPedido", "Status")
                         .WithMany()
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Cliente");
 
                     b.Navigation("Status");
                 });

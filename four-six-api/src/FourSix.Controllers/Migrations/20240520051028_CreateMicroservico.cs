@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -8,12 +7,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FourSix.Controllers.Migrations
 {
-    [ExcludeFromCodeCoverage]
-    public partial class CreateMicroservice : Migration
+    /// <inheritdoc />
+    public partial class CreateMicroservico : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "StatusPedido",
                 columns: table => new
@@ -41,6 +51,12 @@ namespace FourSix.Controllers.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pedido", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pedido_Clientes_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Clientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Pedido_StatusPedido_StatusId",
                         column: x => x.StatusId,
@@ -96,6 +112,11 @@ namespace FourSix.Controllers.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Clientes",
+                column: "Id",
+                value: new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"));
+
+            migrationBuilder.InsertData(
                 table: "StatusPedido",
                 columns: new[] { "Id", "Descricao" },
                 values: new object[,]
@@ -113,12 +134,12 @@ namespace FourSix.Controllers.Migrations
             migrationBuilder.InsertData(
                 table: "Pedido",
                 columns: new[] { "Id", "ClienteId", "DataPedido", "NumeroPedido", "StatusId" },
-                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), new DateTime(2024, 5, 13, 17, 9, 20, 269, DateTimeKind.Local).AddTicks(5522), 1, (short)1 });
+                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), new DateTime(2024, 5, 19, 21, 10, 28, 327, DateTimeKind.Local).AddTicks(3872), 1, (short)1 });
 
             migrationBuilder.InsertData(
                 table: "PedidoCheckout",
                 columns: new[] { "PedidoId", "Sequencia", "DataStatus", "StatusId" },
-                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), 0, new DateTime(2024, 5, 13, 17, 9, 20, 269, DateTimeKind.Local).AddTicks(5522), (short)1 });
+                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), 0, new DateTime(2024, 5, 19, 21, 10, 28, 327, DateTimeKind.Local).AddTicks(3872), (short)1 });
 
             migrationBuilder.InsertData(
                 table: "PedidoItem",
@@ -128,6 +149,11 @@ namespace FourSix.Controllers.Migrations
                     { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), new Guid("63c776f5-4539-478e-a17a-54d3a1c2d3ee"), "Sem tomate", 2, 5.5m },
                     { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), new Guid("9482fcf0-e9e4-4bdc-869f-ad7d1d15016c"), null, 1, 8.25m }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pedido_ClienteId",
+                table: "Pedido",
+                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedido_StatusId",
@@ -151,6 +177,9 @@ namespace FourSix.Controllers.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pedido");
+
+            migrationBuilder.DropTable(
+                name: "Clientes");
 
             migrationBuilder.DropTable(
                 name: "StatusPedido");
