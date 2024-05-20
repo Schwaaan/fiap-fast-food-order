@@ -5,7 +5,6 @@ using FourSix.WebApi.Modules.Commons;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Amazon.Extensions.CognitoAuthentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.CodeAnalysis;
@@ -13,13 +12,14 @@ using System.Diagnostics.CodeAnalysis;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAdapters();
 builder.Services.AddDatabase();
+builder.Services.AddServices();
 builder.Services.AddUseCases();
 builder.Services.AddCustomControllers();
 builder.Services.AddCustomCors();

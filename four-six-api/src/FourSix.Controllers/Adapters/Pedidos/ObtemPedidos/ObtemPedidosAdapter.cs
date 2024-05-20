@@ -1,4 +1,5 @@
-﻿using FourSix.Controllers.ViewModels;
+﻿using FourSix.Controllers.Gateways.Integrations;
+using FourSix.Controllers.ViewModels;
 using FourSix.UseCases.UseCases.Pedidos.ObtemPedidos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,12 @@ namespace FourSix.Controllers.Adapters.Pedidos.ObtemPedidos
         : IObtemPedidosAdapter
     {
         private readonly IObtemPedidosUseCase _useCase;
+        private readonly IProdutoService _produtoService;
 
-        public ObtemPedidosAdapter(IObtemPedidosUseCase useCase)
+        public ObtemPedidosAdapter(IObtemPedidosUseCase useCase, IProdutoService produtoService)
         {
             _useCase = useCase;
+            _produtoService = produtoService;
         }
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ObtemPedidosResponse))]
@@ -21,7 +24,16 @@ namespace FourSix.Controllers.Adapters.Pedidos.ObtemPedidos
             var lista = await _useCase.Execute();
 
             var model = new List<PedidoModel>();
-            lista.ToList().ForEach(f => model.Add(new PedidoModel(f)));
+            lista.ToList().ForEach(f =>
+            {
+                var pedido = new PedidoModel(f);
+                f.Itens.ToList().ForEach(i =>
+                {
+                    var produto = _produtoService.GetProduto(i.ProdutoId).Result;
+                    pedido.AdicionarItem(i, produto);
+                });
+                model.Add(pedido);
+            });
 
             return new ObtemPedidosResponse(model);
         }

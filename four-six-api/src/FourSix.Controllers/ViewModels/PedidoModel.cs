@@ -1,4 +1,5 @@
-﻿using FourSix.Domain.Entities.PedidoAggregate;
+﻿using FourSix.Controllers.Gateways.Integrations;
+using FourSix.Domain.Entities.PedidoAggregate;
 
 namespace FourSix.Controllers.ViewModels
 {
@@ -13,7 +14,6 @@ namespace FourSix.Controllers.ViewModels
             StatusId = pedido.StatusId;
             TotalItens = pedido.TotalItens;
             ValorTotal = pedido.ValorTotal;
-            Itens = pedido.Itens.Select(s => new PedidoItemModel(s)).ToList();
             Checkout = pedido.HistoricoCheckout.Select(s => new PedidoCheckoutModel(s)).ToList();
         }
 
@@ -24,7 +24,15 @@ namespace FourSix.Controllers.ViewModels
         public EnumStatusPedido StatusId { get; }
         public int TotalItens { get; }
         public decimal ValorTotal { get; }
-        public List<PedidoItemModel> Itens { get; }
+        public List<PedidoItemModel> Itens { get; private set; }
         public List<PedidoCheckoutModel> Checkout { get; }
+        public void AdicionarItem(PedidoItem item, ProdutoRequest produto)
+        {
+            if (Itens == null)
+                Itens = new List<PedidoItemModel>();
+
+            Itens.Add(new PedidoItemModel(item, produto));
+        }
+
     }
 }

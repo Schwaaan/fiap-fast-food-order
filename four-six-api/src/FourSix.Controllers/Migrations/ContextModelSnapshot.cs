@@ -160,6 +160,11 @@ namespace FourSix.Controllers.Migrations
                             Id = (short)2,
                             Descricao = "Aguardando Pagamento"
                         },
+                         new
+                         {
+                             Id = (short)3,
+                             Descricao = "Pago"
+                         },
                         new
                         {
                             Id = (short)4,
