@@ -1,6 +1,7 @@
 ﻿using FourSix.Controllers.Adapters.Pedidos.NovoPedido;
 using FourSix.Controllers.ViewModels;
 using FourSix.Domain.Entities.PedidoAggregate;
+using FourSix.Domain.Requests;
 using FourSix.UseCases.Interfaces;
 using FourSix.UseCases.UseCases.Pedidos.NovoPedido;
 using Moq;
@@ -24,6 +25,9 @@ namespace UnitTests.UseCases
 
             var pedido = GerarPedido();
 
+            mockPagamentoService
+                .Setup(x => x.GerarPagamento(It.IsAny<Guid>(), It.IsAny<decimal>()))
+                .ReturnsAsync(new PagamentoResponse { CodigoQR="xpto", Id=Guid.NewGuid(), PedidoId=pedido.Id, ValorPago=pedido.ValorTotal, ValorPedido=pedido.ValorTotal });
 
             // Act
             var pedidoIncluido = await useCase.Execute(pedido.DataPedido, pedido.ClienteId, pedido.Itens.Select(i => new Tuple<Guid, decimal, int, string>(i.ProdutoId, i.ValorUnitario, i.Quantidade, i.Observacao)).ToList());
@@ -32,6 +36,7 @@ namespace UnitTests.UseCases
             Assert.IsType<Pedido>(pedidoIncluido);
             mockRepository.Verify(repo => repo.Incluir(It.IsAny<Pedido>()), Times.Once);
             mockUnitOfWork.Verify(unit => unit.Save(), Times.Once);
+            mockPagamentoService.Verify(unit => unit.GerarPagamento(It.IsAny<Guid>(), It.IsAny<decimal>()), Times.Once);
         }
 
         [Fact]
