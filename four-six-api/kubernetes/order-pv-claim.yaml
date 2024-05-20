@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mssql-order-pvc
 spec:
-  #storageClassName: manual   --somente informar quando houver pv criado
+  storageClassName: manual   #somente informar quando houver pv criado
   accessModes:
   - ReadWriteOnce
   resources:

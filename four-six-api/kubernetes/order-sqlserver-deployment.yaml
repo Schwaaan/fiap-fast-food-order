@@ -24,9 +24,9 @@ spec:
           value: 'SenhaDoBanco(123)'
         - name: ACCEPT_EULA
           value: "Y"
-        volumeMounts:
-        - name: ordermssqldb
-          mountPath: /var/opt/mssql/data
+        #volumeMounts:
+        #- name: ordermssqldb
+        #  mountPath: /var/opt/mssql/data
       volumes:
       - name: ordermssqldb
         persistentVolumeClaim:
