@@ -6,13 +6,16 @@ namespace FourSix.UseCases.UseCases.Pedidos.NovoPedido
     public class NovoPedidoUseCase : INovoPedidoUseCase
     {
         private readonly IPedidoRepository _pedidoRepository;
+        private readonly IPagamentoService _pagamentoService;
         private readonly IUnitOfWork _unitOfWork;
 
         public NovoPedidoUseCase(
             IPedidoRepository pedidoRepository,
+            IPagamentoService pagamentoService,
             IUnitOfWork unitOfWork)
         {
             _pedidoRepository = pedidoRepository;
+            _pagamentoService = pagamentoService;
             _unitOfWork = unitOfWork;
         }
 
@@ -37,6 +40,11 @@ namespace FourSix.UseCases.UseCases.Pedidos.NovoPedido
             {
                 throw new Exception("Pedido já existe");
             }
+
+            var pagamento = await _pagamentoService.GerarPagamento(pedido.Id, pedido.ValorTotal)
+                    .ConfigureAwait(false);
+
+            pedido.DefinirPagamento(pagamento.Id);
 
             await _pedidoRepository
                  .Incluir(pedido)

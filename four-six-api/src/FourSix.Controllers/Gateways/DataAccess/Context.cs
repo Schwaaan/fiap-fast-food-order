@@ -19,7 +19,7 @@ namespace FourSix.Controllers.Gateways.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
-
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
             modelBuilder.ApplyConfiguration(new PedidoConfiguration());
             modelBuilder.ApplyConfiguration(new PedidoItemConfiguration());
             modelBuilder.ApplyConfiguration(new PedidoCheckoutConfiguration());

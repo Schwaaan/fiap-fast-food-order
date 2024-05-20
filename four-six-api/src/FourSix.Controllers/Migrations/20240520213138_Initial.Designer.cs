@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FourSix.Controllers.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240520051028_CreateMicroservico")]
-    partial class CreateMicroservico
+    [Migration("20240520213138_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,14 +31,32 @@ namespace FourSix.Controllers.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Cliente", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b")
+                            Id = new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"),
+                            Cpf = "12851671049",
+                            Email = "joao.silva@gmail.com",
+                            Nome = "João da Silva Gomes"
                         });
                 });
 
@@ -60,6 +78,9 @@ namespace FourSix.Controllers.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NumeroPedido"));
 
+                    b.Property<Guid?>("PagamentoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<short>("StatusId")
                         .HasColumnType("smallint");
 
@@ -76,7 +97,7 @@ namespace FourSix.Controllers.Migrations
                         {
                             Id = new Guid("78e3b8d0-be9a-4407-9304-c61788797808"),
                             ClienteId = new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"),
-                            DataPedido = new DateTime(2024, 5, 19, 21, 10, 28, 327, DateTimeKind.Local).AddTicks(3872),
+                            DataPedido = new DateTime(2024, 5, 20, 13, 31, 38, 284, DateTimeKind.Local).AddTicks(7755),
                             NumeroPedido = 1,
                             StatusId = (short)1
                         });
@@ -107,7 +128,7 @@ namespace FourSix.Controllers.Migrations
                         {
                             PedidoId = new Guid("78e3b8d0-be9a-4407-9304-c61788797808"),
                             Sequencia = 0,
-                            DataStatus = new DateTime(2024, 5, 19, 21, 10, 28, 327, DateTimeKind.Local).AddTicks(3872),
+                            DataStatus = new DateTime(2024, 5, 20, 13, 31, 38, 284, DateTimeKind.Local).AddTicks(7755),
                             StatusId = (short)1
                         });
                 });

@@ -24,6 +24,10 @@ namespace FourSix.Controllers.Gateways.Configurations
                 .IsRequired(false)
                 .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
 
+            builder.Property(b => b.PagamentoId)
+               .IsRequired(false)
+               .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
+
             builder.Property(b => b.NumeroPedido)
                 .IsRequired()
                 .ValueGeneratedOnAdd()

@@ -1,5 +1,4 @@
-﻿using FourSix.Domain.Entities;
-using FourSix.Domain.Entities.ClienteAggregate;
+﻿using FourSix.Domain.Entities.ClienteAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -36,8 +35,6 @@ namespace FourSix.Controllers.Gateways.Configurations
             .IsRequired()
             .HasMaxLength(100)
             .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
-
-
 
         }
     }

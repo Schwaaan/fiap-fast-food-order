@@ -20,6 +20,7 @@ namespace FourSix.Domain.Entities.PedidoAggregate
 
         public int NumeroPedido { get; }
         public Guid? ClienteId { get; }
+        public Guid? PagamentoId { get; set; }
         public DateTime DataPedido { get; }
         public EnumStatusPedido StatusId { get; private set; } = EnumStatusPedido.Criado;
         public IReadOnlyCollection<PedidoItem> Itens => _pedidoItens;
@@ -43,6 +44,11 @@ namespace FourSix.Domain.Entities.PedidoAggregate
         public void AlterarStatus(EnumStatusPedido statusId)
         {
             StatusId = statusId;
+        }
+
+        public void DefinirPagamento(Guid pagamentoId)
+        {
+            PagamentoId= pagamentoId;
         }
     }
 }

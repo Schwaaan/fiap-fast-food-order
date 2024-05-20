@@ -2,6 +2,7 @@
 using FourSix.Controllers.Gateways.Integrations.ProducaoIntegration;
 using FourSix.UseCases.Interfaces;
 using System.Diagnostics.CodeAnalysis;
+using FourSix.Controllers.Gateways.Integrations.PagamentoIntegration;
 
 namespace FourSix.WebApi.Modules
 {
@@ -13,6 +14,7 @@ namespace FourSix.WebApi.Modules
             #region [ Integrations ]
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IProducaoService, ProducaoService>();
+            services.AddScoped<IPagamentoService, PagamentoService>();
             #endregion
 
             return services;

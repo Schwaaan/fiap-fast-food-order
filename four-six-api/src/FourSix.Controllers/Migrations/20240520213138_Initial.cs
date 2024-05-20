@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -9,21 +8,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FourSix.Controllers.Migrations
 {
     /// <inheritdoc />
-    [ExcludeFromCodeCoverage]
-    public partial class CreateMicroservico : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Clientes",
+                name: "Cliente",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                    table.PrimaryKey("PK_Cliente", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,6 +48,7 @@ namespace FourSix.Controllers.Migrations
                     NumeroPedido = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PagamentoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DataPedido = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StatusId = table.Column<short>(type: "smallint", nullable: false)
                 },
@@ -54,9 +56,9 @@ namespace FourSix.Controllers.Migrations
                 {
                     table.PrimaryKey("PK_Pedido", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pedido_Clientes_ClienteId",
+                        name: "FK_Pedido_Cliente_ClienteId",
                         column: x => x.ClienteId,
-                        principalTable: "Clientes",
+                        principalTable: "Cliente",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -114,9 +116,9 @@ namespace FourSix.Controllers.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Clientes",
-                column: "Id",
-                value: new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"));
+                table: "Cliente",
+                columns: new[] { "Id", "Cpf", "Email", "Nome" },
+                values: new object[] { new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), "12851671049", "joao.silva@gmail.com", "João da Silva Gomes" });
 
             migrationBuilder.InsertData(
                 table: "StatusPedido",
@@ -135,13 +137,13 @@ namespace FourSix.Controllers.Migrations
 
             migrationBuilder.InsertData(
                 table: "Pedido",
-                columns: new[] { "Id", "ClienteId", "DataPedido", "NumeroPedido", "StatusId" },
-                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), new DateTime(2024, 5, 19, 21, 10, 28, 327, DateTimeKind.Local).AddTicks(3872), 1, (short)1 });
+                columns: new[] { "Id", "ClienteId", "DataPedido", "NumeroPedido", "PagamentoId", "StatusId" },
+                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), new DateTime(2024, 5, 20, 13, 31, 38, 284, DateTimeKind.Local).AddTicks(7755), 1, null, (short)1 });
 
             migrationBuilder.InsertData(
                 table: "PedidoCheckout",
                 columns: new[] { "PedidoId", "Sequencia", "DataStatus", "StatusId" },
-                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), 0, new DateTime(2024, 5, 19, 21, 10, 28, 327, DateTimeKind.Local).AddTicks(3872), (short)1 });
+                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), 0, new DateTime(2024, 5, 20, 13, 31, 38, 284, DateTimeKind.Local).AddTicks(7755), (short)1 });
 
             migrationBuilder.InsertData(
                 table: "PedidoItem",
@@ -181,7 +183,7 @@ namespace FourSix.Controllers.Migrations
                 name: "Pedido");
 
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "Cliente");
 
             migrationBuilder.DropTable(
                 name: "StatusPedido");

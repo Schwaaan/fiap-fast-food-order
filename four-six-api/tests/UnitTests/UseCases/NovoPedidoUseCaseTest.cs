@@ -17,9 +17,10 @@ namespace UnitTests.UseCases
             var mockRepository = new Mock<IPedidoRepository>();
             var mockCheckoutRepository = new Mock<IPedidoCheckoutRepository>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
+            var mockPagamentoService = new Mock<IPagamentoService>();
 
             mockRepository.Setup(repo => repo.Incluir(It.IsAny<Pedido>())).Returns(Task.CompletedTask);
-            NovoPedidoUseCase useCase = new NovoPedidoUseCase(mockRepository.Object, mockUnitOfWork.Object);
+            NovoPedidoUseCase useCase = new NovoPedidoUseCase(mockRepository.Object, mockPagamentoService.Object, mockUnitOfWork.Object);
 
             var pedido = GerarPedido();
 
@@ -39,11 +40,12 @@ namespace UnitTests.UseCases
             //Arrange
             var mockRepository = new Mock<IPedidoRepository>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
+            var mockPagamentoService = new Mock<IPagamentoService>();
             var pedido = GerarPedido();
 
             mockRepository.Setup(repo => repo.Incluir(It.IsAny<Pedido>())).Returns(Task.CompletedTask);
             mockRepository.Setup(repo => repo.Listar(It.IsAny<Expression<Func<Pedido, bool>>>())).Returns((Expression<Func<Pedido, bool>> predicate) => new List<Pedido> { pedido }.AsQueryable().Where(predicate).ToList());
-            NovoPedidoUseCase useCase = new NovoPedidoUseCase(mockRepository.Object, mockUnitOfWork.Object);
+            NovoPedidoUseCase useCase = new NovoPedidoUseCase(mockRepository.Object, mockPagamentoService.Object, mockUnitOfWork.Object);
             
 
             //Act
