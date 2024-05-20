@@ -1,4 +1,4 @@
-﻿namespace FourSix.Controllers.Gateways.Integrations
+﻿namespace FourSix.Controllers.Gateways.Integrations.ProdutoIntegration
 {
     public class ProdutoWrapper
     {

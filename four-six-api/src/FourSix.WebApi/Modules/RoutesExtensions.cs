@@ -26,7 +26,7 @@ namespace FourSix.WebApi.Modules
 
             app.MapGet("pedidos/{statusId}",
             [SwaggerOperation(Summary = "Obtém lista de pedido por status")]
-            ([SwaggerParameter("Status do pedido<br><br>Recebido = 1<br>Pago = 2<br>EmPreparacao = 3<br>Montagem = 4<br>Pronto = 5<br>Finalizado = 6<br>Cancelado = 7")] EnumStatusPedido statusId, IObtemPedidosPorStatusAdapter adapter) =>
+            ([SwaggerParameter("Status do pedido<br> < br > Criado = 1 < br > Aguardando Pagamento = 2 < br > Pago = 3 < br > EmPreparacao = 4 < br > Pronto = 5 < br > Finalizado = 6 < br > Cancelado = 7 < br > Pagamento Recusado = 8")] EnumStatusPedido statusId, IObtemPedidosPorStatusAdapter adapter) =>
             {
                 return adapter.Listar(statusId);
             }).WithTags("Pedidos");
@@ -54,7 +54,7 @@ namespace FourSix.WebApi.Modules
 
             app.MapPut("pedidos/{pedidoId:Guid}/status/{statusId}",
             [SwaggerOperation(Summary = "Altera status do pedido")]
-            ([SwaggerParameter("ID do Pedido")] Guid pedidoId, [SwaggerParameter("Status do pedido<br><br>Recebido = 1<br>Pago = 2<br>EmPreparacao = 3<br>Montagem = 4<br>Pronto = 5<br>Finalizado = 6<br>Cancelado = 7")] EnumStatusPedido statusId, IAlteraStatusPedidoAdapter adapter) =>
+            ([SwaggerParameter("ID do Pedido")] Guid pedidoId, [SwaggerParameter("Status do pedido<br><br>Criado = 1<br>Aguardando Pagamento = 2<br>Pago = 3<br>EmPreparacao = 4<br>Pronto = 5<br>Finalizado = 6<br>Cancelado = 7<br>Pagamento Recusado = 8")] EnumStatusPedido statusId, IAlteraStatusPedidoAdapter adapter) =>
             {
                 return adapter.Alterar(pedidoId, statusId);
             }).WithTags("Pedidos").AllowAnonymous(); ;

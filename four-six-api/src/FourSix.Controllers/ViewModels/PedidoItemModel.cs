@@ -1,4 +1,4 @@
-﻿using FourSix.Controllers.Gateways.Integrations;
+﻿using FourSix.Controllers.Gateways.Integrations.ProdutoIntegration;
 using FourSix.Domain.Entities.PedidoAggregate;
 
 namespace FourSix.Controllers.ViewModels

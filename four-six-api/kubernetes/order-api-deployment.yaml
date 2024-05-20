@@ -19,6 +19,3 @@ spec:
         image: damffranco/four-six-order-api:latest
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            cpu: 50m

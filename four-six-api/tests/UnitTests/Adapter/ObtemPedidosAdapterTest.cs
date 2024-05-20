@@ -1,15 +1,9 @@
-﻿using FourSix.Controllers.Adapters.Pedidos.NovoPedido;
-using FourSix.Controllers.Adapters.Pedidos.ObtemPedidos;
+﻿using FourSix.Controllers.Adapters.Pedidos.ObtemPedidos;
+using FourSix.Controllers.Gateways.Integrations.ProdutoIntegration;
 using FourSix.Controllers.ViewModels;
 using FourSix.Domain.Entities.PedidoAggregate;
-using FourSix.UseCases.UseCases.Pedidos.NovoPedido;
 using FourSix.UseCases.UseCases.Pedidos.ObtemPedidos;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnitTests.Adapter
 {
@@ -20,6 +14,7 @@ namespace UnitTests.Adapter
         {
             // Arrange
             var mockUseCase = new Mock<IObtemPedidosUseCase>();
+            var mockProdutoService = new Mock<IProdutoService>();
 
             var pedidos = GerarPedidos(5);
 
@@ -27,7 +22,7 @@ namespace UnitTests.Adapter
                 .Setup(x => x.Execute())
                 .ReturnsAsync(pedidos);
 
-            var adapter = new ObtemPedidosAdapter(mockUseCase.Object);
+            var adapter = new ObtemPedidosAdapter(mockUseCase.Object, mockProdutoService.Object);
             var pedidoModel = pedidos.Select(s => new PedidoModel(s)).ToList();
 
             // Act

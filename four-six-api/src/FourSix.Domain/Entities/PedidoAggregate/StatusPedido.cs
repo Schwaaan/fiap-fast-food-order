@@ -8,7 +8,8 @@
         EmPreparacao = 4,
         Pronto = 5,
         Finalizado = 6,
-        Cancelado = 7
+        Cancelado = 7,
+        PagamentoRecusado = 8
     }
 
     public class StatusPedido

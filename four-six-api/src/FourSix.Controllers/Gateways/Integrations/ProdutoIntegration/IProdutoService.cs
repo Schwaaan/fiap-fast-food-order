@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FourSix.Controllers.Gateways.Integrations
+namespace FourSix.Controllers.Gateways.Integrations.ProdutoIntegration
 {
     public interface IProdutoService
     {

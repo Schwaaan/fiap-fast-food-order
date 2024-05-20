@@ -102,10 +102,12 @@ namespace FourSix.Controllers.Migrations
                 {
                     { (short)1, "Criado" },
                     { (short)2, "Aguardando Pagamento" },
-                    { (short)3, "Em Preparação" },
-                    { (short)4, "Pronto" },
-                    { (short)5, "Finalizado" },
-                    { (short)6, "Cancelado" }
+                    { (short)3, "Pago" },
+                    { (short)4, "Em Preparação" },
+                    { (short)5, "Pronto" },
+                    { (short)6, "Finalizado" },
+                    { (short)7, "Cancelado" },
+                    { (short)8, "Pagamento Recusado" }
                 });
 
             migrationBuilder.InsertData(

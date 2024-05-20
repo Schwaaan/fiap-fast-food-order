@@ -1,4 +1,4 @@
-﻿using FourSix.Controllers.Gateways.Integrations;
+﻿using FourSix.Controllers.Gateways.Integrations.ProdutoIntegration;
 using FourSix.Controllers.ViewModels;
 using FourSix.UseCases.UseCases.Pedidos.ObtemPedidos;
 using Microsoft.AspNetCore.Http;

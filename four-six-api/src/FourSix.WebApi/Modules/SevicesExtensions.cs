@@ -1,4 +1,6 @@
-﻿using FourSix.Controllers.Gateways.Integrations;
+﻿using FourSix.Controllers.Gateways.Integrations.ProdutoIntegration;
+using FourSix.Controllers.Gateways.Integrations.ProducaoIntegration;
+using FourSix.UseCases.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 
 namespace FourSix.WebApi.Modules
@@ -10,6 +12,7 @@ namespace FourSix.WebApi.Modules
         {
             #region [ Integrations ]
             services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IProducaoService, ProducaoService>();
             #endregion
 
             return services;
