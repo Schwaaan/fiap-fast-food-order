@@ -1,5 +1,10 @@
 ﻿using FourSix.Controllers.Gateways.Configurations;
 using FourSix.Controllers.Gateways.DataAccess;
+using FourSix.Domain.Entities.ClienteAggregate;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Moq;
+using System.Linq.Expressions;
 
 namespace UnitTests.Repostiories
 {
@@ -65,6 +70,19 @@ namespace UnitTests.Repostiories
 
             // Act
             Action act = () => SeedData.Seed(null);
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(act);
+        }
+
+        [Fact]
+        public void ClienteConfiguration_DeveRetornarArgumentNullException_QuandoBuilderIsNull()
+        {
+            // Arrange
+            var clienteConfiguration = new ClienteConfiguration();
+
+            // Act
+            Action act = () => clienteConfiguration.Configure(null);
 
             // Assert
             Assert.Throws<ArgumentNullException>(act);
