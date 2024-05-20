@@ -17,10 +17,19 @@ namespace UnitTests.Adapter
             var mockProdutoService = new Mock<IProdutoService>();
 
             var pedidos = GerarPedidos(5);
+            var produto = new ProdutoRequest
+            {
+                Id = Guid.NewGuid(),
+                Descricao = "Produto teste"
+            };
 
-            mockUseCase
+           mockUseCase
                 .Setup(x => x.Execute())
                 .ReturnsAsync(pedidos);
+
+            mockProdutoService
+                .Setup(x => x.GetProduto(It.IsAny<Guid>()))
+                .ReturnsAsync(produto);
 
             var adapter = new ObtemPedidosAdapter(mockUseCase.Object, mockProdutoService.Object);
             var pedidoModel = pedidos.Select(s => new PedidoModel(s)).ToList();

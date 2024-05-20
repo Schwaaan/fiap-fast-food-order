@@ -21,6 +21,8 @@ namespace UnitTests.UseCases
             var mockRepository = new Mock<IPedidoRepository>();
             var mockCheckoutRepository = new Mock<IPedidoCheckoutRepository>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
+            var mockProducaoService = new Mock<IProducaoService>();
+
             var pedidos = GerarPedidos();
             var pedidoAlterar = pedidos.Where(q=>q.StatusId==EnumStatusPedido.Criado).First();
 
@@ -28,7 +30,7 @@ namespace UnitTests.UseCases
             mockRepository.Setup(repo => repo.Listar(It.IsAny<Expression<Func<Pedido, bool>>>())).Returns((Expression<Func<Pedido, bool>> predicate) => pedidos.AsQueryable().Where(predicate).ToList());
             mockCheckoutRepository.Setup(repo => repo.Listar(It.IsAny<Expression<Func<PedidoCheckout, bool>>>())).Returns((Expression<Func<PedidoCheckout, bool>> predicate) => pedidoAlterar.HistoricoCheckout.AsQueryable().Where(predicate).ToList());
             mockCheckoutRepository.Setup(repo => repo.Incluir(It.IsAny<PedidoCheckout>())).Returns(Task.CompletedTask);
-            AlteraStatusPedidoUseCase useCase = new AlteraStatusPedidoUseCase(mockRepository.Object, mockUnitOfWork.Object, mockCheckoutRepository.Object);
+            AlteraStatusPedidoUseCase useCase = new AlteraStatusPedidoUseCase(mockRepository.Object, mockProducaoService.Object, mockUnitOfWork.Object, mockCheckoutRepository.Object);
 
 
             // Act
@@ -50,6 +52,8 @@ namespace UnitTests.UseCases
             var mockRepository = new Mock<IPedidoRepository>();
             var mockCheckoutRepository = new Mock<IPedidoCheckoutRepository>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
+            var mockProducaoService = new Mock<IProducaoService>();
+
             var pedidos = GerarPedidos();
             var pedidoAlterar = pedidos.Where(q => q.StatusId == EnumStatusPedido.Criado).First();
 
@@ -57,7 +61,7 @@ namespace UnitTests.UseCases
             mockRepository.Setup(repo => repo.Listar(It.IsAny<Expression<Func<Pedido, bool>>>())).Returns((Expression<Func<Pedido, bool>> predicate) => pedidos.AsQueryable().Where(predicate).ToList());
             mockCheckoutRepository.Setup(repo => repo.Listar(It.IsAny<Expression<Func<PedidoCheckout, bool>>>())).Returns((Expression<Func<PedidoCheckout, bool>> predicate) => pedidoAlterar.HistoricoCheckout.AsQueryable().Where(predicate).ToList());
             mockCheckoutRepository.Setup(repo => repo.Incluir(It.IsAny<PedidoCheckout>())).Returns(Task.CompletedTask);
-            AlteraStatusPedidoUseCase useCase = new AlteraStatusPedidoUseCase(mockRepository.Object, mockUnitOfWork.Object, mockCheckoutRepository.Object);
+            AlteraStatusPedidoUseCase useCase = new AlteraStatusPedidoUseCase(mockRepository.Object, mockProducaoService.Object, mockUnitOfWork.Object, mockCheckoutRepository.Object);
 
 
             // Act
