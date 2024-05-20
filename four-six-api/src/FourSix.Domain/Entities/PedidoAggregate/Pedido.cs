@@ -1,4 +1,6 @@
-﻿namespace FourSix.Domain.Entities.PedidoAggregate
+﻿using FourSix.Domain.Entities.ClienteAggregate;
+
+namespace FourSix.Domain.Entities.PedidoAggregate
 {
     public class Pedido : BaseEntity, IAggregateRoot, IBaseEntity
     {
@@ -24,6 +26,7 @@
         public IReadOnlyCollection<PedidoCheckout> HistoricoCheckout => _pedidoCheckout;
         public int TotalItens => _pedidoItens.Sum(i => i.Quantidade);
         public decimal ValorTotal => _pedidoItens.Sum(i => i.ValorUnitario * i.Quantidade);
+        public Cliente Cliente { get; set; }
         public StatusPedido Status { get; set; }
 
         public void AdicionarItem(Guid ProdutoId, decimal valorUnitario, int quantidade = 1, string? observacao = null)

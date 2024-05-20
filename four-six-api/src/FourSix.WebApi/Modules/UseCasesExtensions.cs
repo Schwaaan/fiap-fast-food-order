@@ -1,4 +1,6 @@
-﻿using FourSix.UseCases.UseCases.Pedidos.AlteraStatusPedido;
+﻿using FourSix.UseCases.UseCases.Clientes.NovoCliente;
+using FourSix.UseCases.UseCases.Clientes.ObtemCliente;
+using FourSix.UseCases.UseCases.Pedidos.AlteraStatusPedido;
 using FourSix.UseCases.UseCases.Pedidos.CancelaPedido;
 using FourSix.UseCases.UseCases.Pedidos.NovoPedido;
 using FourSix.UseCases.UseCases.Pedidos.ObtemPedidos;
@@ -12,6 +14,11 @@ namespace FourSix.WebApi.Modules
     {
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
+            #region [ Clientes ]
+            services.AddScoped<INovoClienteUseCase, NovoClienteUseCase>();
+            services.AddScoped<IObtemClienteUseCase, ObtemClienteUseCase>();
+            #endregion
+
             #region [ Pedidos ]
             services.AddScoped<IAlteraStatusPedidoUseCase, AlteraStatusPedidoUseCase>();
             services.AddScoped<ICancelaPedidoUseCase, CancelaPedidoUseCase>();

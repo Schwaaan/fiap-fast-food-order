@@ -1,4 +1,5 @@
-﻿using FourSix.Domain.Entities.PedidoAggregate;
+﻿using FourSix.Domain.Entities.ClienteAggregate;
+using FourSix.Domain.Entities.PedidoAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace FourSix.Controllers.Gateways.DataAccess
@@ -28,6 +29,11 @@ namespace FourSix.Controllers.Gateways.DataAccess
                 },
                 new
                 {
+                    Id = EnumStatusPedido.Pago,
+                    Descricao = "Pago"
+                },
+                new
+                {
                     Id = EnumStatusPedido.EmPreparacao,
                     Descricao = "Em Preparação"
                 },
@@ -45,7 +51,26 @@ namespace FourSix.Controllers.Gateways.DataAccess
                 {
                     Id = EnumStatusPedido.Cancelado,
                     Descricao = "Cancelado"
+                },
+                new
+                {
+                    Id = EnumStatusPedido.PagamentoRecusado,
+                    Descricao = "Pagamento Recusado"
                 });
+
+            #endregion
+
+            #region POPULA Cliente
+
+            builder.Entity<Cliente>()
+              .HasData(
+               new
+               {
+                   Id = new Guid("717B2FB9-4BBE-4A8C-8574-7808CD652E0B"),
+                   Cpf = "12851671049",
+                   Nome = "João da Silva Gomes",
+                   Email = "joao.silva@gmail.com"
+               });
 
             #endregion
 

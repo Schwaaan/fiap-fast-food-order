@@ -39,6 +39,7 @@ namespace FourSix.Controllers.Gateways.Configurations
                 .HasConversion<short>()
                 .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
 
+            builder.HasOne(x => x.Cliente).WithMany().HasForeignKey(b => b.ClienteId).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(x => x.Status).WithMany().HasForeignKey(b => b.StatusId).OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(x => x.Itens).WithOne().HasForeignKey(b => b.PedidoId).OnDelete(DeleteBehavior.Cascade);

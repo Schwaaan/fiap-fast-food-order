@@ -1,4 +1,6 @@
-﻿using FourSix.Controllers.Adapters.Pedidos.AlteraStatusPedido;
+﻿using FourSix.Controllers.Adapters.Clientes.NovoCliente;
+using FourSix.Controllers.Adapters.Clientes.ObtemCliente;
+using FourSix.Controllers.Adapters.Pedidos.AlteraStatusPedido;
 using FourSix.Controllers.Adapters.Pedidos.CancelaPedido;
 using FourSix.Controllers.Adapters.Pedidos.NovoPedido;
 using FourSix.Controllers.Adapters.Pedidos.ObtemPedidos;
@@ -15,6 +17,24 @@ namespace FourSix.WebApi.Modules
     {
         public static void AddRoutesMaps(this IEndpointRouteBuilder app)
         {
+            #region [ Clientes ]
+
+            app.MapGet("clientes/{cpf}",
+            [SwaggerOperation(Summary = "Obtém cliente")]
+            ([SwaggerParameter("CPF do cliente")] string cpf, IObtemClienteAdapter adapter) =>
+            {
+                return adapter.Obter(cpf);
+            }).WithTags("Clientes");
+
+            app.MapPost("clientes",
+            [SwaggerOperation(Summary = "Cria novo cliente")]
+            ([FromBody] NovoClienteRequest request, INovoClienteAdapter adapter) =>
+            {
+                return adapter.Inserir(request);
+            }).WithTags("Clientes");
+
+            #endregion
+
             #region [ Pedidos ]
 
             app.MapGet("pedidos",

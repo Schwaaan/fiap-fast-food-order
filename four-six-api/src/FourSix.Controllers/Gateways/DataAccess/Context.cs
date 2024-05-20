@@ -1,4 +1,5 @@
 ﻿using FourSix.Controllers.Gateways.Configurations;
+using FourSix.Domain.Entities.ClienteAggregate;
 using FourSix.Domain.Entities.PedidoAggregate;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,7 @@ namespace FourSix.Controllers.Gateways.DataAccess
 {
     public class Context : DbContext
     {
+        public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<StatusPedido> StatusPedidos { get; set; }
         public DbSet<PedidoCheckout> PedidosCheckouts { get; set; }
