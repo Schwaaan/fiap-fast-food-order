@@ -50,3 +50,8 @@ kubectl apply -f pv-claim.yaml,sqlserver-deployment.yaml,sqlserver-service.yaml,
 
 | <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/09d0e2ab-4d4d-4874-af77-404e5cd1cd6c" width=115><br><sub>Diego Franco</sub> |  <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/b1ce0748-d58e-464a-ad44-1a8a6b6f82a6" width=115><br><sub>Jair Schwan</sub> | <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/80c49cda-1d54-4c76-b7d4-020fac25027f" width=115><br><sub>Ivan Gomes</sub> |
 | :---: | :---: | :---:
+
+
+Segue imagem com a porcentagem de cobertura de testes utilizando a ferramenta Xplat Code Coverage
+
+![WhatsApp Image 2024-05-20 at 23 18 41_84ca9751](https://github.com/Schwaaan/fiap-fast-food-order/assets/49553583/59fbb30c-02f2-4445-97d2-23972b377518)
