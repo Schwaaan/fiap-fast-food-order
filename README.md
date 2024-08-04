@@ -31,7 +31,7 @@ Após baixar o projeto
 ...\four-six-api\kubernetes
 
 2. Abra o terminal e execute o seguinte comando
-kubectl apply -f pv-claim.yaml,sqlserver-order-deployment.yaml,sqlserver-service.yaml
+kubectl apply -f order-pv-volume.yaml,order-pv-claim.yaml,order-sqlserver-deployment.yaml,order-sqlserver-service.yaml
 
 3. Abra o projeto no Visual Studio e execute a Aplicação FourSix.WebApi
 

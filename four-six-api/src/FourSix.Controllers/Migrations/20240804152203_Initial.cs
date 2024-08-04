@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -8,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FourSix.Controllers.Migrations
 {
-    [ExcludeFromCodeCoverage]
     /// <inheritdoc />
     public partial class Initial : Migration
     {
@@ -22,11 +20,27 @@ namespace FourSix.Controllers.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DataAnonimizado = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cliente", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SolicitacaoLgpd",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DataSolicitacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataAtendimento = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SolicitacaoLgpd", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,8 +133,8 @@ namespace FourSix.Controllers.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cliente",
-                columns: new[] { "Id", "Cpf", "Email", "Nome" },
-                values: new object[] { new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), "12851671049", "joao.silva@gmail.com", "João da Silva Gomes" });
+                columns: new[] { "Id", "Cpf", "DataAnonimizado", "Email", "Nome" },
+                values: new object[] { new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), "12851671049", null, "joao.silva@gmail.com", "João da Silva Gomes" });
 
             migrationBuilder.InsertData(
                 table: "StatusPedido",
@@ -140,12 +154,12 @@ namespace FourSix.Controllers.Migrations
             migrationBuilder.InsertData(
                 table: "Pedido",
                 columns: new[] { "Id", "ClienteId", "DataPedido", "NumeroPedido", "PagamentoId", "StatusId" },
-                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), new DateTime(2024, 5, 20, 13, 31, 38, 284, DateTimeKind.Local).AddTicks(7755), 1, null, (short)1 });
+                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"), new DateTime(2024, 8, 4, 7, 22, 3, 676, DateTimeKind.Local).AddTicks(7766), 1, null, (short)1 });
 
             migrationBuilder.InsertData(
                 table: "PedidoCheckout",
                 columns: new[] { "PedidoId", "Sequencia", "DataStatus", "StatusId" },
-                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), 0, new DateTime(2024, 5, 20, 13, 31, 38, 284, DateTimeKind.Local).AddTicks(7755), (short)1 });
+                values: new object[] { new Guid("78e3b8d0-be9a-4407-9304-c61788797808"), 0, new DateTime(2024, 8, 4, 7, 22, 3, 676, DateTimeKind.Local).AddTicks(7766), (short)1 });
 
             migrationBuilder.InsertData(
                 table: "PedidoItem",
@@ -180,6 +194,9 @@ namespace FourSix.Controllers.Migrations
 
             migrationBuilder.DropTable(
                 name: "PedidoItem");
+
+            migrationBuilder.DropTable(
+                name: "SolicitacaoLgpd");
 
             migrationBuilder.DropTable(
                 name: "Pedido");

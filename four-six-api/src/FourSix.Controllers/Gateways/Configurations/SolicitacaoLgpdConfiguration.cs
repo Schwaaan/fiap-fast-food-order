@@ -4,17 +4,17 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FourSix.Controllers.Gateways.Configurations
 {
-    public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
+    public class SolicitacaoLgpdConfiguration : IEntityTypeConfiguration<SolicitacaoLgpd>
     {
 
-        public void Configure(EntityTypeBuilder<Cliente> builder)
+        public void Configure(EntityTypeBuilder<SolicitacaoLgpd> builder)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.ToTable("Cliente");
+            builder.ToTable("SolicitacaoLgpd");
             builder.HasKey(e => e.Id);
             builder.Property(b => b.Id)
                 .IsRequired()
@@ -31,12 +31,11 @@ namespace FourSix.Controllers.Gateways.Configurations
                 .HasMaxLength(50)
                 .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
 
-            builder.Property(b => b.Email)
-            .IsRequired()
-            .HasMaxLength(100)
-            .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
+            builder.Property(b => b.DataSolicitacao)
+           .IsRequired()
+           .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
 
-            builder.Property(b => b.DataAnonimizado)
+            builder.Property(b => b.DataAtendimento)
            .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
 
         }

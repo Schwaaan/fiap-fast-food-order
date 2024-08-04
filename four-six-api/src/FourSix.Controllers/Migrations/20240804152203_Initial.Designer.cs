@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FourSix.Controllers.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240520213138_Initial")]
+    [Migration("20240804152203_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -36,6 +36,9 @@ namespace FourSix.Controllers.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
+                    b.Property<DateTime?>("DataAnonimizado")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -58,6 +61,34 @@ namespace FourSix.Controllers.Migrations
                             Email = "joao.silva@gmail.com",
                             Nome = "João da Silva Gomes"
                         });
+                });
+
+            modelBuilder.Entity("FourSix.Domain.Entities.ClienteAggregate.SolicitacaoLgpd", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<DateTime?>("DataAtendimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataSolicitacao")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SolicitacaoLgpd", (string)null);
                 });
 
             modelBuilder.Entity("FourSix.Domain.Entities.PedidoAggregate.Pedido", b =>
@@ -97,7 +128,7 @@ namespace FourSix.Controllers.Migrations
                         {
                             Id = new Guid("78e3b8d0-be9a-4407-9304-c61788797808"),
                             ClienteId = new Guid("717b2fb9-4bbe-4a8c-8574-7808cd652e0b"),
-                            DataPedido = new DateTime(2024, 5, 20, 13, 31, 38, 284, DateTimeKind.Local).AddTicks(7755),
+                            DataPedido = new DateTime(2024, 8, 4, 7, 22, 3, 676, DateTimeKind.Local).AddTicks(7766),
                             NumeroPedido = 1,
                             StatusId = (short)1
                         });
@@ -128,7 +159,7 @@ namespace FourSix.Controllers.Migrations
                         {
                             PedidoId = new Guid("78e3b8d0-be9a-4407-9304-c61788797808"),
                             Sequencia = 0,
-                            DataStatus = new DateTime(2024, 5, 20, 13, 31, 38, 284, DateTimeKind.Local).AddTicks(7755),
+                            DataStatus = new DateTime(2024, 8, 4, 7, 22, 3, 676, DateTimeKind.Local).AddTicks(7766),
                             StatusId = (short)1
                         });
                 });

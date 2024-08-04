@@ -1,5 +1,6 @@
 ﻿using FourSix.Controllers.Adapters.Clientes.NovoCliente;
 using FourSix.Controllers.Adapters.Clientes.ObtemCliente;
+using FourSix.Controllers.Adapters.Clientes.SolicitaLgpd;
 using FourSix.Controllers.Adapters.Pedidos.AlteraStatusPedido;
 using FourSix.Controllers.Adapters.Pedidos.CancelaPedido;
 using FourSix.Controllers.Adapters.Pedidos.NovoPedido;
@@ -32,6 +33,13 @@ namespace FourSix.WebApi.Modules
             {
                 return adapter.Inserir(request);
             }).WithTags("Clientes");
+
+            app.MapPost("clientes/lgpd",
+           [SwaggerOperation(Summary = "Solicita expurgo de dados Lgpd")]
+            ([FromBody] SolicitaLgpdRequest request, ISolicitaLgpdAdapter adapter) =>
+           {
+               return adapter.Inserir(request);
+           }).WithTags("Clientes");
 
             #endregion
 

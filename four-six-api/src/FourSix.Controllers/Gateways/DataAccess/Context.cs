@@ -8,6 +8,7 @@ namespace FourSix.Controllers.Gateways.DataAccess
     public class Context : DbContext
     {
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<SolicitacaoLgpd> SolicitacoesLgpd { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<StatusPedido> StatusPedidos { get; set; }
         public DbSet<PedidoCheckout> PedidosCheckouts { get; set; }
@@ -24,6 +25,7 @@ namespace FourSix.Controllers.Gateways.DataAccess
             modelBuilder.ApplyConfiguration(new PedidoItemConfiguration());
             modelBuilder.ApplyConfiguration(new PedidoCheckoutConfiguration());
             modelBuilder.ApplyConfiguration(new StatusPedidoConfiguration());
+            modelBuilder.ApplyConfiguration(new SolicitacaoLgpdConfiguration());
             SeedData.Seed(modelBuilder);
         }
     }

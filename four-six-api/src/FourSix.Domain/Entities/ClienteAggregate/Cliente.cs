@@ -13,5 +13,10 @@
         public string Cpf { get; }
         public string Nome { get; }
         public string Email { get; }
+        public DateTime? DataAnonimizado { get; private set; }
+        public void Anonimizar()
+        {
+            DataAnonimizado = DateTime.Now;
+        }
     }
 }
