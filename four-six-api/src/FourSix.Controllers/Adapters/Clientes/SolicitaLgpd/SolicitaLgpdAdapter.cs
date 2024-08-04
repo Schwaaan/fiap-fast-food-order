@@ -16,7 +16,7 @@ namespace FourSix.Controllers.Adapters.Clientes.SolicitaLgpd
             _useCase = useCase;
         }
 
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NovoClienteResponse))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SolicitaLgpdResponse))]
         public async Task<SolicitaLgpdResponse> Inserir(SolicitaLgpdRequest solicitaLgpd)
         {
             var model = new SolicitacaoLgpdModel(await _useCase.Execute(solicitaLgpd.Cpf, solicitaLgpd.NomeCompleto));
