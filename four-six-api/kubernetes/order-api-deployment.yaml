@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: c-foursix-deployment
-        image: damffranco/four-six-order-api:latest
+        image: ivangomesneto/four-six-order-api:latest
         ports:
         - containerPort: 80
