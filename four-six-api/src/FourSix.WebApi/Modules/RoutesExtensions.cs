@@ -1,5 +1,7 @@
-﻿using FourSix.Controllers.Adapters.Clientes.NovoCliente;
+﻿using FourSix.Controllers.Adapters.Clientes.ExecutaLgpd;
+using FourSix.Controllers.Adapters.Clientes.NovoCliente;
 using FourSix.Controllers.Adapters.Clientes.ObtemCliente;
+using FourSix.Controllers.Adapters.Clientes.SolicitaLgpd;
 using FourSix.Controllers.Adapters.Pedidos.AlteraStatusPedido;
 using FourSix.Controllers.Adapters.Pedidos.CancelaPedido;
 using FourSix.Controllers.Adapters.Pedidos.NovoPedido;
@@ -33,6 +35,20 @@ namespace FourSix.WebApi.Modules
                 return adapter.Inserir(request);
             }).WithTags("Clientes");
 
+            app.MapPost("clientes/lgpd",
+            [SwaggerOperation(Summary = "Solicita remoção de dados Lgpd")]
+            ([FromBody] SolicitaLgpdRequest request, ISolicitaLgpdAdapter adapter) =>
+            {
+                return adapter.Inserir(request);
+            }).WithTags("Clientes");
+
+            app.MapPut("clientes/lgpd/{solicitacaoLgpdId}",
+            [SwaggerOperation(Summary = "Executa a remoção de dados Lgpd")]
+            ([FromRoute] Guid solicitacaoLgpdId, IExecutaLgpdAdapter adapter) =>
+            {
+                 return adapter.ExecutarLgpd(solicitacaoLgpdId);
+            }).WithTags("Clientes");
+
             #endregion
 
             #region [ Pedidos ]
@@ -44,7 +60,7 @@ namespace FourSix.WebApi.Modules
                 return adapter.Listar();
             }).WithTags("Pedidos").AllowAnonymous();
 
-            app.MapGet("pedidos/{statusId}",
+            app.MapGet("pedidos/status/{statusId}",
             [SwaggerOperation(Summary = "Obtém lista de pedido por status")]
             ([SwaggerParameter("Status do pedido<br> < br > Criado = 1 < br > Aguardando Pagamento = 2 < br > Pago = 3 < br > EmPreparacao = 4 < br > Pronto = 5 < br > Finalizado = 6 < br > Cancelado = 7 < br > Pagamento Recusado = 8")] EnumStatusPedido statusId, IObtemPedidosPorStatusAdapter adapter) =>
             {

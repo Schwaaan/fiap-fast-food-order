@@ -1,5 +1,7 @@
-﻿using FourSix.Controllers.Adapters.Clientes.NovoCliente;
+﻿using FourSix.Controllers.Adapters.Clientes.ExecutaLgpd;
+using FourSix.Controllers.Adapters.Clientes.NovoCliente;
 using FourSix.Controllers.Adapters.Clientes.ObtemCliente;
+using FourSix.Controllers.Adapters.Clientes.SolicitaLgpd;
 using FourSix.Controllers.Adapters.Pedidos.AlteraStatusPedido;
 using FourSix.Controllers.Adapters.Pedidos.CancelaPedido;
 using FourSix.Controllers.Adapters.Pedidos.NovoPedido;
@@ -17,6 +19,8 @@ namespace FourSix.WebApi.Modules
             #region [ Clientes ]
             services.AddScoped<INovoClienteAdapter, NovoClienteAdapter>();
             services.AddScoped<IObtemClienteAdapter, ObtemClienteAdapter>();
+            services.AddScoped<ISolicitaLgpdAdapter, SolicitaLgpdAdapter>();
+            services.AddScoped<IExecutaLgpdAdapter, ExecutaLgpdAdapter>();
             #endregion
 
             #region [ Pedidos ]

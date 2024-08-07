@@ -10,8 +10,16 @@
             this.Nome = nome;
             this.Email = email;
         }
-        public string Cpf { get; }
-        public string Nome { get; }
-        public string Email { get; }
+        public string Cpf { get; private set; }
+        public string Nome { get; private set; }
+        public string Email { get; private set; }
+        public DateTime? DataAnonimizado { get; private set; }
+        public void Anonimizar()
+        {
+            Cpf = Guid.NewGuid().ToString().Substring(0, 11);
+            Nome = Guid.NewGuid().ToString();
+            Email = Guid.NewGuid().ToString();
+            DataAnonimizado = DateTime.Now;
+        }
     }
 }

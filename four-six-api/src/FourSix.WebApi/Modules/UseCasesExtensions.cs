@@ -1,5 +1,7 @@
-﻿using FourSix.UseCases.UseCases.Clientes.NovoCliente;
+﻿using FourSix.UseCases.UseCases.Clientes.ExecutaLgpd;
+using FourSix.UseCases.UseCases.Clientes.NovoCliente;
 using FourSix.UseCases.UseCases.Clientes.ObtemCliente;
+using FourSix.UseCases.UseCases.Clientes.SolicitaLgpd;
 using FourSix.UseCases.UseCases.Pedidos.AlteraStatusPedido;
 using FourSix.UseCases.UseCases.Pedidos.CancelaPedido;
 using FourSix.UseCases.UseCases.Pedidos.NovoPedido;
@@ -17,6 +19,8 @@ namespace FourSix.WebApi.Modules
             #region [ Clientes ]
             services.AddScoped<INovoClienteUseCase, NovoClienteUseCase>();
             services.AddScoped<IObtemClienteUseCase, ObtemClienteUseCase>();
+            services.AddScoped<ISolicitaLgpdUseCase, SolicitaLgpdUseCase>();
+            services.AddScoped<IExecutaLgpdUseCase, ExecutaLgpdUseCase>();
             #endregion
 
             #region [ Pedidos ]
