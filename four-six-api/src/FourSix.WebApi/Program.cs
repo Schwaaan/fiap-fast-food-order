@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.CodeAnalysis;
+using FourSix.WebApi.BackgroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddUseCases();
 builder.Services.AddCustomControllers();
 builder.Services.AddCustomCors();
 builder.Services.AddSwaggerConfig();
+builder.Services.AddHostedService<BackgroundQueueReader>();
 
 //TODO - Removida autenticação
 //builder.Services.AddCognitoIdentity();

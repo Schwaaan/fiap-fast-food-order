@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.1" />
+		<PackageReference Include="AWSSDK.SQS" Version="3.7.400.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.28" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
 		  <PrivateAssets>all</PrivateAssets>
