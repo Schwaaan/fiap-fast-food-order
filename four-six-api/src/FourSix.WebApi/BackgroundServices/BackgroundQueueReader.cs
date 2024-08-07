@@ -1,7 +1,7 @@
 ﻿using Amazon;
 using Amazon.SQS;
 using FourSix.Controllers.Adapters.Pedidos.AlteraStatusPedido;
-using FourSix.Controllers.ViewModels;
+using FourSix.WebApi.Models;
 using Newtonsoft.Json;
 
 namespace FourSix.WebApi.BackgroundServices
@@ -40,10 +40,10 @@ namespace FourSix.WebApi.BackgroundServices
             {
                 try
                 {
-                    var pedidoModel = JsonConvert.DeserializeObject<PedidoModel>(message.Body);
+                    var pedidoModel = JsonConvert.DeserializeObject<PedidoQueueModel>(message.Body);
 
                     if (pedidoModel != null)
-                        await _alteraStatusPedidoAdapter.Alterar(pedidoModel.Id, pedidoModel.StatusId);
+                        await _alteraStatusPedidoAdapter.Alterar(pedidoModel.Id, (Domain.Entities.PedidoAggregate.EnumStatusPedido)pedidoModel.StatusId);
 
                     await _amazonSQSClient.DeleteMessageAsync(_endpointQueue, message.ReceiptHandle);
                 }
