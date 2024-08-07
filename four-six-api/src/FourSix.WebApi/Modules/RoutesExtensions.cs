@@ -60,7 +60,7 @@ namespace FourSix.WebApi.Modules
                 return adapter.Listar();
             }).WithTags("Pedidos").AllowAnonymous();
 
-            app.MapGet("pedidos/{statusId}",
+            app.MapGet("pedidos/status/{statusId}",
             [SwaggerOperation(Summary = "Obtém lista de pedido por status")]
             ([SwaggerParameter("Status do pedido<br> < br > Criado = 1 < br > Aguardando Pagamento = 2 < br > Pago = 3 < br > EmPreparacao = 4 < br > Pronto = 5 < br > Finalizado = 6 < br > Cancelado = 7 < br > Pagamento Recusado = 8")] EnumStatusPedido statusId, IObtemPedidosPorStatusAdapter adapter) =>
             {
