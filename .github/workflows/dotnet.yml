@@ -59,9 +59,8 @@ jobs:
         aws-region: us-east-1
     - name: Deploy to EKS
       run: | 
-          aws eks --region us-east-1 update-kubeconfig --name Fiap-FourSix
-          kubectl delete svc api-svc-order-foursix foursixordersql
-          kubectl delete deployment foursix-order-deployment sqlserver-order-deployment
+          aws eks --region us-east-1 update-kubeconfig --name fiap-foursix
+          kubectl delete deployment foursix-order-deployment sqlserver-order-deployment --ignore-not-found=true
           kubectl apply -f four-six-api/kubernetes/order-sqlserver-deployment.yaml
           kubectl apply -f four-six-api/kubernetes/order-sqlserver-service.yaml
           kubectl apply -f four-six-api/kubernetes/order-api-deployment.yaml
