@@ -1,10 +1,12 @@
 ﻿using FourSix.Controllers.Adapters.Clientes.ExecutaLgpd;
 using FourSix.Controllers.Adapters.Clientes.NovoCliente;
 using FourSix.Controllers.Adapters.Clientes.ObtemCliente;
+using FourSix.Controllers.Adapters.Clientes.ObtemClientes;
 using FourSix.Controllers.Adapters.Clientes.SolicitaLgpd;
 using FourSix.Controllers.Adapters.Pedidos.AlteraStatusPedido;
 using FourSix.Controllers.Adapters.Pedidos.CancelaPedido;
 using FourSix.Controllers.Adapters.Pedidos.NovoPedido;
+using FourSix.Controllers.Adapters.Pedidos.ObtemPedido;
 using FourSix.Controllers.Adapters.Pedidos.ObtemPedidos;
 using FourSix.Controllers.Adapters.Pedidos.ObtemPedidosPorStatus;
 using FourSix.Domain.Entities.PedidoAggregate;
@@ -26,6 +28,13 @@ namespace FourSix.WebApi.Modules
             ([SwaggerParameter("CPF do cliente")] string cpf, IObtemClienteAdapter adapter) =>
             {
                 return adapter.Obter(cpf);
+            }).WithTags("Clientes");
+
+            app.MapGet("clientes",
+            [SwaggerOperation(Summary = "Obtém lista de clientes")]
+            (IObtemClientesAdapter adapter) =>
+            {
+                return adapter.Listar();
             }).WithTags("Clientes");
 
             app.MapPost("clientes",
@@ -59,6 +68,13 @@ namespace FourSix.WebApi.Modules
             {
                 return adapter.Listar();
             }).WithTags("Pedidos").AllowAnonymous();
+
+            app.MapGet("pedidos/{id}",
+            [SwaggerOperation(Summary = "Obtém pedido")]
+            ([SwaggerParameter("Id do pedido")] Guid id, IObtemPedidoAdapter adapter) =>
+            {
+                return adapter.Obter(id);
+            }).WithTags("Pedidos");
 
             app.MapGet("pedidos/status/{statusId}",
             [SwaggerOperation(Summary = "Obtém lista de pedido por status")]

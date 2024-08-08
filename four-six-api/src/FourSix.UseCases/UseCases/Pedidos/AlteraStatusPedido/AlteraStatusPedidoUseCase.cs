@@ -33,10 +33,10 @@ namespace FourSix.UseCases.UseCases.Pedidos.AlteraStatusPedido
                 throw new Exception("Pedido não encontrado");
             }
 
+            var novaSequencia = _pedidoCheckoutRepository.Listar(l => l.PedidoId == pedidoId).Max(l => l.Sequencia) + 1;
+
             pedido.AlterarStatus(statusId);
             await _pedidoRepository.Alterar(pedido);
-
-            var novaSequencia = _pedidoCheckoutRepository.Listar(l => l.PedidoId == pedidoId).Max(l => l.Sequencia) + 1;
 
             await _pedidoCheckoutRepository
                  .Incluir(new PedidoCheckout(pedidoId, novaSequencia, statusId, dataStatus))
