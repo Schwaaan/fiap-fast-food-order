@@ -12,6 +12,9 @@ A FourSix Solutions é um conjunto de APIs desenvolvido para resolver os desafio
 # Arquitetura do Projeto
 https://www.notion.so/Arquitetura-60cd5abe29284ddab0fdec98db94882a
 
+# RIPD
+https://github.com/Schwaaan/fiap-fast-food-order/blob/main/RIPD%20-%20Foursix.pdf
+
 ## Ferramentas utilizadas
 | <a href="https://learn.microsoft.com/pt-br/dotnet/" target="_blank"> <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/2d89d325-9f3d-4920-b496-dfdc9ff5ded7" alt=".netCore" height="50" /></a> | <a href="https://learn.microsoft.com/pt-br/sql/?view=sql-server-ver16" target="_blank"><img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/4585295d-5064-421e-9652-a5dd1f38622b" alt=".netCore"  height="50"/></a> | <a href="https://docs.docker.com/manuals/" target="_blank"> <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/238b190a-67b1-4002-9d1d-23fe34e2bc7f" alt=".netCore" height="50"/></a> | <a href="https://kubernetes.io/pt-br/docs/home/" target="_blank"> <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/30c37852-b6ff-414a-9b59-0b4f5b5d499a" alt=".netCore" height="50"/></a>
 | :---: | :---: | :---: | :---:
